@@ -11,6 +11,7 @@ function App() {
       icon: logo,
       native: true
     })
+    console.log("notification");
   }
 
   return (
@@ -18,7 +19,7 @@ function App() {
       <header>
         Notification App | Pruebas Javier Albornoz
       </header>
-      <button type='button' onClick={toNotificate()}>
+      <button type='button' onClick={() => toNotificate()}>
         Done!
       </button>
     </div>
