@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import logo from './logo.svg'
 import { getAuth, signInAnonymously } from 'firebase/auth'
 import { getToken, onMessage } from 'firebase/messaging'
@@ -9,6 +9,8 @@ import { toast, ToastContainer } from 'react-toastify';
 
 function App() {
 
+  const [tokenCopy, setTokenCopy] = useState('')
+
   const logIn = () => {
     signInAnonymously(getAuth()).then(usuario => console.log(usuario));
   }
@@ -18,7 +20,10 @@ function App() {
       vapidKey: "BI7aD9TNevn5V-sMO6vKqcFJBLIQBUpCkSpgljoGkGk8W9LyrrfDFtf05iwZ-a5eO1GHw7m5StJrtfIatyjRdpU"
     }).catch(error => console.log("hubo un problema con la key"));
 
-    if (token) console.log("Token obtenido", token);
+    if (token) {
+      console.log("Token obtenido", token);
+      setTokenCopy(token);
+    }
     if (!token) console.log(" Sin token");
   }
 
@@ -36,6 +41,7 @@ function App() {
         Notification App | Pruebas Javier Albornoz
       </header>
       <ToastContainer />
+      <p>Token: {tokenCopy}</p>
       <button type='button' onClick={logIn}>
         logIn
       </button>
